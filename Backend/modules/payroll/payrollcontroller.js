@@ -18,7 +18,7 @@ const usersalarybyitsid = async(req,res) =>{
 }
 const GenerateSlip = async (req, res) => {
   const db = getDB();
-  const { user_id, month } = req.body;
+  const { user_id, month, action } = req.body;
 
   const user = await db.collection('SalaryInfo').findOne({ 
    employee_id :user_id });
@@ -33,7 +33,14 @@ try {
     month
   });
 
-  if (salaryslip && 
+  // If already paid, always return the saved slip
+  if (salaryslip && salaryslip.status === "Paid") {
+    console.log('Paid salary slip fetched:', salaryslip);
+    return res.json(salaryslip);
+  }
+
+  // If just fetching/previewing and we have a slip, return it (unless it's a 'pay' action)
+  if (salaryslip && action !== 'pay' && 
       salaryslip.salary_breakdown?.net_salary !== null && 
       !isNaN(salaryslip.salary_breakdown?.net_salary)) {
     console.log('Saved salary slip fetched:', salaryslip);
@@ -99,15 +106,18 @@ try {
       net_salary: netSalary
     },
 
-    status: "Processed",
+    status: action === 'pay' ? "Paid" : "Processed",
     generated_on: new Date().toISOString().slice(0, 10)
   };
 
-  await db.collection('Payrolls').updateOne(
-    { employee_id: user_id, month },
-    { $set: payrollDoc },
-    { upsert: true }
-  );
+  if (action === 'pay' || !salaryslip) {
+    await db.collection('Payrolls').updateOne(
+      { employee_id: user_id, month },
+      { $set: payrollDoc },
+      { upsert: true }
+    );
+    console.log(`Salary slip ${action === 'pay' ? 'Paid' : 'Generated/Updated'}:`, payrollDoc);
+  }
   console.log('Salary slip generated/updated:', payrollDoc);
   return res.json(payrollDoc);
 

@@ -89,7 +89,7 @@ const HRCalendar = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="w-full space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <CalendarIcon className="text-indigo-600" />

@@ -95,7 +95,8 @@ const Announcements = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen space-y-6">
+    <div className="min-h-screen bg-gray-50 p-4 md:p-8 flex flex-col">
+      <div className="w-full space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-800">Announcements</h1>
         <p className="text-sm text-gray-500">Create, edit, and view all announcements.</p>
@@ -161,16 +162,16 @@ const Announcements = () => {
         </form>
       </div>
 
-      <div className="bg-white rounded-xl shadow p-4">
-        <h2 className="text-lg font-semibold mb-4">All Announcements</h2>
+      <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden p-6">
+        <h2 className="text-xl font-bold text-gray-800 mb-6">All Announcements</h2>
 
         {loading ? (
           <p className="text-sm text-gray-600">Loading announcements...</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead className="bg-gray-100 text-gray-700">
-                <tr>
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="bg-gray-50/50 border-b border-gray-100 text-gray-500">
                   <th className="p-2 text-left">Title</th>
                   <th className="p-2 text-left">Start Date</th>
                   <th className="p-2 text-left">End Date</th>
@@ -178,16 +179,9 @@ const Announcements = () => {
                   <th className="p-2 text-left">Action</th>
                 </tr>
               </thead>
-              <tbody>
-                {announcements.length === 0 ? (
-                  <tr>
-                    <td colSpan="5" className="p-3 text-center text-gray-500">
-                      No announcements found.
-                    </td>
-                  </tr>
-                ) : (
-                  announcements.map((item) => (
-                    <tr key={item._id} className="border-t">
+                  <tbody>
+                    {announcements.map((item) => (
+                      <tr key={item._id} className="border-b border-gray-50 hover:bg-gray-50/50 transition">
                       <td className="p-2">{item.title}</td>
                       <td className="p-2">{item.startDate}</td>
                       <td className="p-2">{item.endDate}</td>
@@ -201,14 +195,21 @@ const Announcements = () => {
                         </button>
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                    ))}
+                    {announcements.length === 0 && (
+                      <tr>
+                        <td colSpan="5" className="p-8 text-center text-gray-500">
+                          No announcements found.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
-    </div>
   );
 };
 

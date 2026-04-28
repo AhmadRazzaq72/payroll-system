@@ -316,6 +316,32 @@ const Salary = () => {
 
     fetchSalary();
   }, [selectedMonth, selectedYear, user_id]);
+
+  const handlePay = async (item) => {
+    try {
+      const res = await fetch(apiUrl("/api/Generate"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          month: item.month,
+          user_id: item.employee_id,
+          action: "pay",
+        }),
+      });
+
+      const result = await res.json();
+      if (result) {
+        setData([result]);
+        alert("Payroll finalized and marked as Paid!");
+      }
+    } catch (err) {
+      console.error("Error finalizing payroll:", err);
+      alert("Failed to finalize payroll.");
+    }
+  };
+
   console.log("recieve data is, in data variable", data)
 
   const toggleOpen = (index) => {
@@ -363,8 +389,8 @@ const Salary = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col ">
-      <div className="flex-1 p-6 overflow-auto">
+    <div className="min-h-screen bg-gray-50 p-4 md:p-8 flex flex-col">
+      <div className="w-full">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">Salary Info Of User {id}</h1>
 
         {/* Filter Section */}
@@ -429,11 +455,26 @@ const Salary = () => {
                     </span>
                     <button
                       onClick={() => downloadPDF(item)}
-                      className="bg-violet-600 text-white text-sm px-4 py-2 rounded-full shadow-md hover:bg-violet-700 transition flex items-center gap-2"
+                      className="bg-gray-600 text-white text-sm px-4 py-2 rounded-full shadow-md hover:bg-gray-700 transition flex items-center gap-2"
                     >
                       <Download className="w-4 h-4" />
-                      Download
+                      PDF
                     </button>
+                    {item.status !== "Paid" ? (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handlePay(item);
+                        }}
+                        className="bg-green-600 text-white text-sm px-6 py-2 rounded-full shadow-md hover:bg-green-700 transition font-bold"
+                      >
+                        Pay
+                      </button>
+                    ) : (
+                      <span className="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-bold border border-green-200">
+                        PAID
+                      </span>
+                    )}
                     {openIndex === index ? (
                       <ChevronUp className="w-5 h-5 text-gray-600" />
                     ) : (

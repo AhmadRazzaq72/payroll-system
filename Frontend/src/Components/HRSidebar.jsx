@@ -12,6 +12,8 @@ import {
   UserRoundPen,
   Megaphone,
   NotepadText,
+  BarChart3,
+  CircleDollarSign,
 } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -62,7 +64,6 @@ const Sidebar = () => {
             {[
               { label: 'Dashboard', icon: <LayoutDashboard size={18} />, path: '/hrhome' },
               { label: 'Employees', icon: <Users size={18} />, path: '/hremployees' },
-              { label: 'Add Employee', icon: <UserPlus size={18} />, path: '/hraddemployee' },
               { label: 'Payroll System', icon: <Wallet size={18} />, path: '/hrpayrollsystem' },
               { label: 'Calendar', icon: <Calendar size={18} />, path: '/hrcalendar' },
               { label: 'Profile', icon: <User size={18} />, path: `/hrprofile/${user?.id}` },
@@ -70,6 +71,8 @@ const Sidebar = () => {
               { label: 'Employee Queries', icon: <UserRoundPen  size={18} />, path: '/hrquery' },
               { label: 'Announcements', icon: <Megaphone size={18} />, path: '/hrannouncements' },
               { label: 'Leave Requests', icon: <NotepadText size={18} />, path: '/hrleave-management' },
+              { label: 'Finance', icon: <CircleDollarSign size={18} />, path: '/hrfinance' },
+              { label: 'Reports', icon: <BarChart3 size={18} />, path: '/hrreports' },
             ].map(({ label, icon, path }) => (
               <button
                 key={path}

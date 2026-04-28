@@ -130,7 +130,7 @@ const ContactHR = () => {
           </div>
 
           {/* Attachment */}
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <label className="font-medium text-gray-700 mb-1">Attachment</label>
             <input
               type="file"
@@ -142,7 +142,7 @@ const ContactHR = () => {
                 📎 {attachment.name}
               </p>
             )}
-          </div>
+          </div> */}
         </div>
 
         {/* Submit Button */}

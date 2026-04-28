@@ -3,7 +3,7 @@ import Header from "../../Components/Header"; // Adjust if needed
 import Sidebar from "../../Components/HRSidebar"; // Adjust if needed
 import { useNavigate } from "react-router-dom";
 import { apiUrl } from "../../utils/api";
-import { Trash2, Edit } from "lucide-react";
+import { Trash2, Edit, Plus } from "lucide-react";
 
 const Employees = () => {
   // const employees = [
@@ -90,8 +90,17 @@ useEffect(() => {
   );
   return (
     <div className="min-h-screen flex flex-col">
-        <div className="flex-1 p-6 bg-gray-50">
-          <h2 className="text-2xl font-semibold mb-4">Employees List</h2>
+        <div className="flex-1 p-6 bg-gray-50 w-full">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-semibold">Employees List</h2>
+            <button
+              onClick={() => navigate('/hraddemployee')}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl shadow-lg transition flex items-center gap-2 font-semibold"
+            >
+              <Plus className="w-5 h-5" />
+              Add Employee
+            </button>
+          </div>
 
           {/* Search Bar */}
           <div className="mb-4">
@@ -105,9 +114,9 @@ useEffect(() => {
           </div>
 
           {/* Table */}
-          <div className="bg-white shadow-md rounded-xl p-4">
-            <table className="min-w-full text-sm">
-              <thead className="bg-gray-100 text-gray-600">
+          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <table className="w-full text-left">
+              <thead className="bg-gray-50/50 border-b border-gray-100 text-gray-600">
                 <tr>
                   <th className="text-left px-6 py-3">Sr.no</th>
                   <th className="text-left px-6 py-3">Employee Id</th>
@@ -122,7 +131,7 @@ useEffect(() => {
              filteredEmployees.map((emp, index) => (
                   <tr
                     key={index}
-                    className="border-t border-gray-200 hover:bg-gray-50"
+                    className="border-b border-gray-50 hover:bg-gray-50/50 transition cursor-pointer"
                     onClick={()=>navigate(`/hremployees/profile/${emp.user_id}`)}
                   >
                     <td className="px-6 py-4">{String(index + 1).padStart(2, "0")}</td>

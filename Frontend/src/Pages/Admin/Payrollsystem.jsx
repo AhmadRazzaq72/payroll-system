@@ -29,8 +29,8 @@ useEffect(() => {
     emp.user_id?.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <div className="min-h-screen flex flex-col">
-        <div className="flex-1 p-6 bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col p-6">
+        <div className="flex-1 w-full">
           <h2 className="text-2xl font-semibold mb-4">Employees List</h2>
 
           {/* Search Bar */}
@@ -45,9 +45,9 @@ useEffect(() => {
           </div>
 
           {/* Table */}
-          <div className="bg-white rounded shadow overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead className="bg-gray-100 text-gray-600">
+          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <table className="w-full text-left">
+              <thead className="bg-gray-50/50 border-b border-gray-100 text-gray-600">
                 <tr>
                   <th className="text-left px-6 py-3">Sr.no</th>
                   <th className="text-left px-6 py-3">Employee Id</th>
@@ -61,7 +61,7 @@ useEffect(() => {
              filteredEmployees.map((emp, index) => (
                   <tr
                     key={index}
-                    className="border-t border-gray-200 hover:bg-gray-50"
+                    className="border-b border-gray-50 hover:bg-gray-50/50 transition cursor-pointer"
                     onClick={()=>navigate(`/hremployees/profile/${emp.user_id}`)}
                   >
                     <td className="px-6 py-4">{String(index + 1).padStart(2, "0")}</td>

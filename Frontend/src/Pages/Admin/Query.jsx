@@ -76,8 +76,9 @@ const HRRequests = () => {
   });
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-bold mb-6">📩 Employee HR Requests</h1>
+    <div className="min-h-screen bg-gray-50 p-4 md:p-8 flex flex-col">
+      <div className="w-full space-y-6">
+        <h1 className="text-2xl font-bold text-gray-800">📩 Employee HR Requests</h1>
 
       <div className="flex flex-wrap gap-2 mb-4">
         {filters.map((filter) => (
@@ -98,9 +99,10 @@ const HRRequests = () => {
       {loading && <p className="mb-4 text-sm text-gray-600">Loading requests...</p>}
       {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
 
-      <div className="bg-white shadow-md rounded-xl p-4">
-        <table className="min-w-full text-sm">
-          <thead className="bg-gray-100 text-gray-600">
+      <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left">
+            <thead className="bg-gray-50/50 border-b border-gray-100 text-gray-500">
             <tr>
               <th className="p-3">Employee</th>
               <th className="p-3">Subject</th>
@@ -112,16 +114,9 @@ const HRRequests = () => {
               <th className="p-3">Action</th>
             </tr>
           </thead>
-          <tbody>
-            {!loading && filteredRequests.length === 0 ? (
-              <tr>
-                <td colSpan="8" className="px-6 py-6 text-center text-gray-500">
-                  No HR requests found for {activeFilter}.
-                </td>
-              </tr>
-            ) : (
-              filteredRequests.map((req) => (
-              <tr key={req._id || req.id} className="border-t border-gray-200 hover:bg-gray-50">
+              <tbody>
+                {filteredRequests.map((req) => (
+                  <tr key={req._id || req.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition">
                 {/* Employee Name */}
                 <td className="px-6 py-4">
                   <p className="font-semibold">{req.employeeName}</p>
@@ -200,9 +195,18 @@ const HRRequests = () => {
                   </div>
                 </td>
               </tr>
-            ))) }
-          </tbody>
-        </table>
+                ))}
+                {!loading && filteredRequests.length === 0 && (
+                  <tr>
+                    <td colSpan="8" className="px-8 py-12 text-center text-gray-500">
+                      No HR requests found for {activeFilter}.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

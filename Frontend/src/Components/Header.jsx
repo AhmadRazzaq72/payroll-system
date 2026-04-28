@@ -13,21 +13,7 @@ const Header = () => {
         />
       </div>
 
-      {/* Search Bar - hidden on small screens */}
-      <div className="hidden sm:flex w-full sm:w-1/2 md:w-1/3 items-center bg-gray-100 rounded-md px-3 py-1">
-        <Search className="w-4 h-4 text-gray-500 mr-2" />
-        <input
-          type="text"
-          placeholder="Search..."
-          className="bg-transparent w-full focus:outline-none text-sm"
-        />
-      </div>
-
-      {/* Notification Bell - hidden on small screens */}
-      <div className="hidden sm:flex relative">
-        <Bell className="w-6 h-6 text-gray-600" />
-        <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full" />
-      </div>
+      {/* Search and Notifications removed per request */}
     </header>
   );
 };

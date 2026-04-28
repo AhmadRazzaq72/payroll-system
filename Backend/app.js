@@ -12,6 +12,7 @@ const cloudinaryroutes = require('./modules/cloudinary/cloudinaryroutes');
 const contectHRRoutes = require('./modules/contactwithHR/contectHRRoutes');
 const announcementRoutes = require('./modules/announcements/announcements.routes');
 const leaveRoutes = require('./modules/leave/leaveRoutes');
+const financeRoutes = require('./modules/finance/finance.routes');
 const app = express();
 
 // ✅ Configure CORS for React frontend
@@ -38,5 +39,6 @@ app.use('/api', cloudinaryroutes);
 app.use('/api/contact-hr', contectHRRoutes);
 app.use('/api', announcementRoutes);
 app.use('/api/leaves', leaveRoutes);
+app.use('/api/finance', financeRoutes);
 
 module.exports = app;

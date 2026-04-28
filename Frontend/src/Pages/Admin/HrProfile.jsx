@@ -10,9 +10,9 @@ const Hrprofile = () => {
   const [tab, setTab] = useState("Personal Info");
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
-      <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
-        <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-64px)]">
+    <div className="min-h-screen flex flex-col bg-gray-50 p-4 md:p-8">
+      <div className="w-full">
+        <div className="flex flex-col lg:flex-row gap-6">
           <Profile />
           <div className="flex-1 bg-white p-6 rounded-2xl shadow-md flex flex-col">
             <nav className="flex gap-4 border-b pb-3 mb-4 text-sm font-medium">

@@ -118,295 +118,286 @@ const AddEmployee = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-        <div className="flex-1 p-6 bg-gray-50">
-          <h2 className="text-2xl font-semibold mb-6">
-            {isUpdateMode ? "Update Employee" : "Add Employee"}
-          </h2>
-
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white p-8 rounded-xl shadow-md max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+      <div className="w-full">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              {isUpdateMode ? "Update Employee" : "Register New Employee"}
+            </h1>
+            <p className="text-gray-500">Fill in the details to {isUpdateMode ? "update" : "add"} an employee in the system</p>
+          </div>
+          <button 
+            onClick={() => navigate('/hremployees')}
+            className="text-gray-500 hover:text-gray-800 font-medium transition"
           >
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Employee Name:
-              </label>
-              <input
-                type="text"
-                name="name"
-                placeholder="ex. John Doe"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-              <div>
-              <label className="block text-sm font-medium mb-1">
-                Employee id:
-              </label>
-              <input
-                type="text"
-                name="id"
-                placeholder="ex. CS001"
-                value={formData.id}
-                onChange={handleChange}
-                disabled={isUpdateMode}
-                className="w-full border px-4 py-2 rounded disabled:bg-gray-100"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Employee Address:
-              </label>
-              <input
-                type="text"
-                name="address"
-                placeholder="ex. House no, Society name, District, State"
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-              <div>{/*Gender*/}
-              <label className="block text-sm font-medium mb-1">
-                Gender:
-              </label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              >
-                <option value="">Please Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-                        <div>
-              <label className="block text-sm font-medium mb-1">
-                Employee Bank Account No.:
-              </label>
-              <input
-                type="text"
-                name="bankAccount"
-                placeholder="ex. ************"
-                value={formData.bankAccount}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-          
-              <div>
-              <label className="block text-sm font-medium mb-1">
-                IFSC CODE.:
-              </label>
-              <input
-                type="text"
-                name="IFSC"
-                placeholder="ex. SBI001"
-                value={formData.IFSC}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Employee Mobile No.:
-              </label>
-              <input
-                type="text"
-                name="mobile"
-                placeholder="ex. 9876543273"
-                value={formData.mobile}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Employee Mail ID:
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="ex. abc@mail.com"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-
-            <div> {/*Designation*/}
-              <label className="block text-sm font-medium mb-1">
-                Designation:
-              </label>
-              <input
-                type="text"
-                name="designation"
-                placeholder="ex. Software Engineer"
-                value={formData.designation}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div> 
-
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Employee Salary:
-              </label>
-              <input
-                type="text"
-                name="salary"
-                placeholder="ex. 20,000"
-                value={formData.salary}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-              <div>{/*Role*/}
-              <label className="block text-sm font-medium mb-1">
-                Role:
-              </label>
-              <select
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              >
-                <option value="">Please Select</option>
-                <option value="HR">HR</option>
-                <option value="employee">Employee</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Employment Type:
-              </label>
-              <select
-                name="employmentType"
-                value={formData.employmentType}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              >
-                <option value="">Please Select</option>
-                <option value="Full Time">Full Time</option>
-                <option value="Part Time">Part Time</option>
-                <option value="Contract">Contract</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Employee Attendance Type:
-              </label>
-              <select
-                name="attendanceType"
-                value={formData.attendanceType}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              >
-                <option value="">Please Select</option>
-                <option value="Daily">Daily</option>
-                <option value="Hourly">Hourly</option>
-              </select>
-            </div>
-
-              <div>{/*Joining Date*/}
-              <label className="block text-sm font-medium mb-1">
-                 Joining Date:
-              </label>
-              <input
-                type="text"
-                name="joigningDate"
-                placeholder="ex. 18-07-2025"
-                value={formData.joigningDate}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-
-            <div>{/*Emergencycontactname*/}
-              <label className="block text-sm font-medium mb-1">
-                Emergency Contact Name:
-              </label>
-              <input
-                type="text"
-                name="emergencyContactname"
-                placeholder="ex. Rahul"
-                value={formData.emergencyContactname}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-            
-              <div>{/*Emergencycontact*/}
-              <label className="block text-sm font-medium mb-1">
-                Emergency Contact:
-              </label>
-              <input
-                type="text"
-                name="emergencyContact"
-                placeholder="ex. 9875641230"
-                value={formData.emergencyContact}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Annual Leave Allowance:
-              </label>
-              <input
-                type="number"
-                name="leaveAllowance"
-                placeholder="ex. 30"
-                value={formData.leaveAllowance}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            </div>
-
-
-            <div className="col-span-1 md:col-span-2 mt-4">
-              <button
-                type="submit"
-                className="bg-purple-600 text-white font-semibold px-6 py-2 rounded hover:bg-purple-700 shadow"
-              >
-                {isUpdateMode ? "Update Employee" : "Add Employee"}
-              </button>
-            </div>
-          </form>
+            &larr; Back to List
+          </button>
         </div>
+
+        <form onSubmit={handleSubmit} className="space-y-8 pb-12">
+          {/* Section 1: Personal Details */}
+          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="px-8 py-6 bg-gray-50/50 border-b border-gray-100">
+              <h2 className="text-lg font-bold text-gray-800">Personal Information</h2>
+            </div>
+            <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Employee ID</label>
+                <input
+                  type="text"
+                  name="id"
+                  placeholder="EMP001"
+                  value={formData.id}
+                  onChange={handleChange}
+                  disabled={isUpdateMode}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition disabled:bg-gray-50 disabled:text-gray-400"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Gender</label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Mobile Number</label>
+                <input
+                  type="text"
+                  name="mobile"
+                  placeholder="+1 234 567 890"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                />
+              </div>
+              <div className="space-y-1 lg:col-span-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Permanent Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Street, City, State, Country"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Section 2: Job & Employment */}
+          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="px-8 py-6 bg-gray-50/50 border-b border-gray-100">
+              <h2 className="text-lg font-bold text-gray-800">Job & Employment Details</h2>
+            </div>
+            <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Designation</label>
+                <input
+                  type="text"
+                  name="designation"
+                  placeholder="Software Engineer"
+                  value={formData.designation}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Monthly Salary ($)</label>
+                <input
+                  type="text"
+                  name="salary"
+                  placeholder="5000"
+                  value={formData.salary}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Employment Role</label>
+                <select
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                >
+                  <option value="">Select Role</option>
+                  <option value="HR">HR / Admin</option>
+                  <option value="employee">Standard Employee</option>
+                </select>
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Employment Type</label>
+                <select
+                  name="employmentType"
+                  value={formData.employmentType}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                >
+                  <option value="">Select Type</option>
+                  <option value="Full Time">Full Time</option>
+                  <option value="Part Time">Part Time</option>
+                  <option value="Contract">Contract</option>
+                </select>
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Attendance Type</label>
+                <select
+                  name="attendanceType"
+                  value={formData.attendanceType}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                >
+                  <option value="">Select Type</option>
+                  <option value="Daily">Daily Basis</option>
+                  <option value="Hourly">Hourly Basis</option>
+                </select>
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Joining Date</label>
+                <input
+                  type="text"
+                  name="joigningDate"
+                  placeholder="YYYY-MM-DD"
+                  value={formData.joigningDate}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-gray-400 uppercase ml-1">Annual Leave Allowance</label>
+                <input
+                  type="number"
+                  name="leaveAllowance"
+                  value={formData.leaveAllowance}
+                  onChange={handleChange}
+                  className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Section 3: Bank Details */}
+            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+              <div className="px-8 py-6 bg-gray-50/50 border-b border-gray-100">
+                <h2 className="text-lg font-bold text-gray-800">Bank Information</h2>
+              </div>
+              <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase ml-1">Bank Account Number</label>
+                  <input
+                    type="text"
+                    name="bankAccount"
+                    placeholder="Acc No. ************"
+                    value={formData.bankAccount}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                    required
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase ml-1">IFSC / Swift Code</label>
+                  <input
+                    type="text"
+                    name="IFSC"
+                    placeholder="BANK0123"
+                    value={formData.IFSC}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 4: Emergency Contact */}
+            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+              <div className="px-8 py-6 bg-gray-50/50 border-b border-gray-100">
+                <h2 className="text-lg font-bold text-gray-800">Emergency Contact</h2>
+              </div>
+              <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase ml-1">Contact Name</label>
+                  <input
+                    type="text"
+                    name="emergencyContactname"
+                    placeholder="Relative Name"
+                    value={formData.emergencyContactname}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                    required
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-gray-400 uppercase ml-1">Emergency Phone</label>
+                  <input
+                    type="text"
+                    name="emergencyContact"
+                    placeholder="Relative Phone"
+                    value={formData.emergencyContact}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-4">
+            <button
+              type="submit"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-12 py-4 rounded-2xl shadow-xl shadow-indigo-100 transition-all hover:scale-[1.02] active:scale-95"
+            >
+              {isUpdateMode ? "Update Employee Data" : "Register Employee"}
+            </button>
+          </div>
+        </form>
+      </div>
       
 
       {toast.message && (

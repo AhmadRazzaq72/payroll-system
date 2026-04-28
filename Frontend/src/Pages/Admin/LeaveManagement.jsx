@@ -47,7 +47,7 @@ const LeaveManagement = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <div className="flex flex-1 overflow-hidden">
         <main className="flex-1 overflow-y-auto p-6">
-          <div className="max-w-6xl mx-auto">
+          <div className="w-full">
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-2xl font-bold text-gray-800">Leave Management</h1>
               <div className="text-sm text-gray-500 bg-white px-4 py-2 rounded-lg shadow-sm border">
@@ -55,11 +55,11 @@ const LeaveManagement = () => {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md border overflow-hidden">
+            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
               <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
+                <table className="w-full text-left">
                   <thead>
-                    <tr className="bg-gray-50 border-b">
+                    <tr className="bg-gray-50/50 border-b border-gray-100">
                       <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Employee</th>
                       <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Leave Details</th>
                       <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Reason</th>

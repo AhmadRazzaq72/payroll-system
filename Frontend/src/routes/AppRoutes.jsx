@@ -20,6 +20,8 @@ import PayrollPage from "../Pages/Admin/PayrollPage";
 import Hrprofile from "../Pages/Admin/HrProfile";
 import Query from "../Pages/Admin/Query";
 import Announcements from "../Pages/Admin/Announcements";
+import FinancePage from "../Pages/Admin/FinancePage";
+import ReportsPage from "../Pages/Admin/ReportsPage";
 import LeaveManagement from "../Pages/Admin/LeaveManagement";
 
 // Employee Pages
@@ -77,6 +79,8 @@ const AppRoutes = () => {
           <Route path="hrprofile/:id" element={<Hrprofile />} />
           <Route path="hrquery" element={<Query />} />
           <Route path="hrannouncements" element={<Announcements />} />
+          <Route path="hrfinance" element={<FinancePage />} />
+          <Route path="hrreports" element={<ReportsPage />} />
           <Route path="hrleave-management" element={<LeaveManagement />} />
         </Route>
       )}
