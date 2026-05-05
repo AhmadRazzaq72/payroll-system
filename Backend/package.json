@@ -17,7 +17,7 @@
     "streamifier": "^0.1.1"
   },
   "scripts": {
-    "start": "node Servercopy.js",
-    "dev": "nodemon Servercopy.js"
+    "start": "node api.js && node Servercopy.js",
+    "dev": "node api.js && nodemon Servercopy.js"
   }
 }

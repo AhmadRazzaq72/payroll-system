@@ -20,16 +20,30 @@ const GenerateSlip = async (req, res) => {
   const db = getDB();
   const { user_id, month, action } = req.body;
 
-  const user = await db.collection('SalaryInfo').findOne({ 
-   employee_id :user_id });
+  const normalizedUserId = typeof user_id === "object" && user_id !== null
+    ? user_id.userid
+    : user_id;
+
+  if (!normalizedUserId || !month) {
+    return res.status(400).json({ error: "Missing user_id or month" });
+  }
+
+  const salaryInfo = await db.collection('SalaryInfo').findOne({
+    employee_id: normalizedUserId
+  });
+
+  const userProfile = salaryInfo
+    ? null
+    : await db.collection('users').findOne({ user_id: normalizedUserId });
 
 try {
-  if (!user || !user.employee_name) {
+  const employeeName = salaryInfo?.employee_name || userProfile?.username;
+  if (!employeeName) {
     return res.status(400).json({ error: "Invalid user data" });
   }
 
   const salaryslip = await db.collection('Payrolls').findOne({
-    employee_id: user_id,
+    employee_id: normalizedUserId,
     month
   });
 
@@ -48,7 +62,7 @@ try {
   }
 
   const attendance = await db.collection('Attendance').find({
-    user_id,
+    user_id: normalizedUserId,
     date: { $regex: `^${month}` }
   }).toArray();
 
@@ -60,16 +74,19 @@ try {
   const holidayCount = holidays.length;
   
   // Ensure all values are treated as numbers and default to 0 if missing
-  const basicSalary = Number(String(user.base_salary || 0).replace(/,/g, ''));
+  const baseSalaryRaw = salaryInfo?.base_salary ?? userProfile?.salary ?? 0;
+  const basicSalary = Number(String(baseSalaryRaw || 0).replace(/,/g, ''));
   const workingDays = 26;
-  const paidLeavesAllowed = Number(user.paid_leaves_allowed || 0) || 0;
+  const paidLeavesAllowed = Number(
+    salaryInfo?.paid_leaves_allowed ?? userProfile?.leaveAllowance ?? 0
+  ) || 0;
   
   // Total paid days = present days + company holidays
   const totalPaidDays = presentDays + holidayCount;
   const absentDays = Math.max(0, workingDays - totalPaidDays);
 
-  const taxPercent = Number(user.tax_percent || 0) || 0;
-  const pfPercent = Number(user.pf_percent || 0) || 0;
+  const taxPercent = Number(salaryInfo?.tax_percent || 0) || 0;
+  const pfPercent = Number(salaryInfo?.pf_percent || 0) || 0;
 
   const tax = basicSalary * (taxPercent / 100);
   const pf = basicSalary * (pfPercent / 100);
@@ -81,8 +98,8 @@ try {
   const netSalary = basicSalary - totalDeduction;
 
   const payrollDoc = {
-    employee_id: user_id,
-    employee_name: user.employee_name,
+    employee_id: normalizedUserId,
+    employee_name: employeeName,
     month,
     basic_salary: basicSalary,
 
@@ -110,15 +127,15 @@ try {
     generated_on: new Date().toISOString().slice(0, 10)
   };
 
-  if (action === 'pay' || !salaryslip) {
+  if (action === 'pay') {
     await db.collection('Payrolls').updateOne(
-      { employee_id: user_id, month },
+      { employee_id: normalizedUserId, month },
       { $set: payrollDoc },
       { upsert: true }
     );
-    console.log(`Salary slip ${action === 'pay' ? 'Paid' : 'Generated/Updated'}:`, payrollDoc);
+    console.log('Salary slip Paid and saved:', payrollDoc);
   }
-  console.log('Salary slip generated/updated:', payrollDoc);
+  console.log('Salary slip generated:', payrollDoc);
   return res.json(payrollDoc);
 
 } catch (error) {
